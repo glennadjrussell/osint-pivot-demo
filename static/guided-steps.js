@@ -1,0 +1,96 @@
+// The scripted walkthrough: each step is one pivot plus the lesson it teaches.
+const GUIDED_STEPS = [
+  {
+    type: "email",
+    value: "dwhitmore.dev@mail.example",
+    title: "Start from one anchor",
+    narration: "Everything hangs off one anchor: the application email. Running it through every source returns the identifiers the applicant supplied. That is the first hop of the tree.",
+    concept: "Anchor selector",
+  },
+  {
+    type: "github",
+    value: "dwhitmore-dev",
+    title: "Pivot to the GitHub account",
+    narration: "The Gravatar image hash links the email to a GitHub profile. A shared artefact like that is a pivot in its own right.",
+    concept: "Pivot on a shared artefact",
+  },
+  {
+    type: "ssh_key",
+    value: "SHA256:xK3vQ9mT2fLr8WpZ1cYdN4hB7sJa0eG6uKoR5iVtPw",
+    title: "Pivot on the SSH key",
+    narration: "The commit's SSH key is the most useful selector here. Keys are hard to reuse by accident, so a key shared across accounts is a strong signal.",
+    concept: "High-value selector",
+  },
+  {
+    type: "github",
+    value: "jhkim-chain",
+    title: "A second persona with the same key",
+    narration: "The same key authorises a second account with a different name. One person is running two identities.",
+    concept: "Alias clusters",
+  },
+  {
+    type: "domain",
+    value: "whitmore-blockchain.example",
+    title: "Check the portfolio domain",
+    narration: "The portfolio site was registered nine days before the application. Its WHOIS registrant is the same alias that signed the commits. That is the first independent agreement between two sources.",
+    concept: "Corroboration",
+  },
+  {
+    type: "email",
+    value: "jin.sk.dev@mail.example",
+    title: "Pivot on the corroborated alias",
+    narration: "A 2021 leak holds the same alias under a third handle. Each independent source that agrees makes the link harder to dismiss.",
+    concept: "Pivot on a corroborated selector",
+  },
+  {
+    type: "phone",
+    value: "+1 555-0142",
+    title: "Check the phone number",
+    narration: "A VoIP number is listed on a freelance profile under the second handle. A different kind of data source has now connected the same people.",
+    concept: "Cross-domain corroboration",
+  },
+  {
+    type: "image",
+    value: "img:sha256:ab12cd34ef56",
+    title: "Check the headshot",
+    narration: "The photo belongs to a real engineer who has nothing to do with this case. The applicant is using someone else's identity. Do not contact that person during an investigation.",
+    concept: "Victim identification",
+  },
+  {
+    type: "ip",
+    value: "203.0.113.47",
+    title: "Check the interview IP",
+    narration: "The IP geolocates to Lisbon, matching the stated location. But the ASN is a residential proxy pool, and that is how the real location is hidden.",
+    concept: "Infrastructure hides location",
+  },
+  {
+    type: "nameserver",
+    value: "ns1.bulkhost.example",
+    title: "Follow the shared nameserver",
+    narration: "The nameserver from the WHOIS record also hosts three other career sites. Infrastructure clusters reveal the operation.",
+    concept: "Infrastructure clustering",
+  },
+  {
+    type: "domain",
+    value: "crypto-advisors-hub.example",
+    title: "Inspect a front site",
+    narration: "One of the clustered sites takes a 'consulting fee' payment into a wallet that is tagged in our advisory.",
+    concept: "Follow the money",
+  },
+  {
+    type: "ip",
+    value: "198.51.100.20",
+    title: "The false positive",
+    narration: "This IP looks like another link, but it is a coworking space with 40+ unrelated users. A weak link should stay weak. Do not attribute on it.",
+    concept: "False positive",
+  },
+  {
+    type: "wallet",
+    value: "0xA11CE000000000000000000000000000000000B1",
+    title: "Trace the payroll wallet",
+    narration: "The payroll wallet sends to a cluster that includes the advisory-tagged wallet. Two independent paths now lead to the same wallet.",
+    concept: "Attribution",
+  },
+];
+
+if (typeof module !== "undefined") module.exports = { GUIDED_STEPS };

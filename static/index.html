@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OSINT pivot demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Catching a job applicant</h1>
+      <p id="applicant" class="muted small"></p>
+    </div>
+    <div class="controls">
+      <span id="progress" class="pill"></span>
+      <button id="next" class="primary" type="button">Next step</button>
+      <button id="reset" type="button">Start over</button>
+    </div>
+  </header>
+
+  <section id="picker" class="picker card" hidden>
+    <p class="eyebrow">Start</p>
+    <h2>Choose a starting selector</h2>
+    <p class="muted">Everything in the investigation hangs off one selector. Pick the one you want to start from. Each is an identifier the applicant supplied.</p>
+    <div id="roots" class="root-grid"></div>
+    <div class="picker-actions">
+      <button id="guided-start" class="primary" type="button">Run the guided walkthrough from the application email</button>
+    </div>
+  </section>
+
+  <main id="workspace" class="workspace" hidden>
+    <section class="card flow-card">
+      <div class="card-head">
+        <h2>Pivot flow</h2>
+        <label class="toggle"><input id="whole-tree" type="checkbox"> Show whole tree</label>
+      </div>
+      <div id="flow" class="flow" role="img" aria-label="Sankey diagram of pivots from the root selector"></div>
+      <div class="flow-foot">
+        <p id="flow-note" class="muted small"></p>
+        <div class="reveal" role="group" aria-label="Reveal the diagram one column at a time">
+          <button id="reveal-back" class="small-btn" type="button">← Back</button>
+          <span id="reveal-status" class="muted small"></span>
+          <button id="reveal-next" class="primary small-btn" type="button">Reveal next →</button>
+          <button id="reveal-all" class="small-btn" type="button">Show all</button>
+        </div>
+        <ul class="legend">
+          <li><span class="dot given"></span>Given</li>
+          <li><span class="dot high"></span>High</li>
+          <li><span class="dot medium"></span>Medium</li>
+          <li><span class="dot low"></span>Low</li>
+          <li><span class="dot ioc"></span>Advisory IOC</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card detail-card" id="detail" aria-live="polite"></section>
+  </main>
+
+  <p id="status" class="status" role="status"></p>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="vendor/d3-sankey.min.js"></script>
+  <script src="case.js"></script>
+  <script src="guided-steps.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
