@@ -586,8 +586,23 @@ function selectorCard(node, snapshot) {
     el(
       "div",
       { class: "tags" },
-      el("button", { class: "primary small-btn", type: "button", disabled: state.busy, onclick: () => pivot(node) }, "Run all sources"),
+      runAllButton(node, snapshot),
     ),
+  );
+}
+
+// The button says whether its sources have already run, so a second click is never a silent no-op.
+function runAllButton(node, snapshot) {
+  const accepting = snapshot.sources.filter((source) => source.types.includes(node.type));
+  const ran = new Set(snapshot.searched.filter((item) => item.pivot === node.key).map((item) => item.source));
+  const allRun = accepting.length > 0 && accepting.every((source) => ran.has(source.name));
+  let label = "Run all sources";
+  if (accepting.length === 0) label = "No sources for this type";
+  else if (allRun) label = "All sources run";
+  return el(
+    "button",
+    { class: "primary small-btn", type: "button", disabled: state.busy || allRun || accepting.length === 0, onclick: () => pivot(node) },
+    label,
   );
 }
 
